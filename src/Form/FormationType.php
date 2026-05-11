@@ -15,8 +15,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * Formulaire d'ajout et de modification d'une formation.
+ * Définit les champs (titre, description, vidéo, date, playlist, catégories)
+ * et les contraintes de validation associées.
+ */
 class FormationType extends AbstractType
 {
+    /**
+     * Construit le formulaire avec tous ses champs et contraintes.
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -64,6 +75,11 @@ class FormationType extends AbstractType
         ;
     }
 
+    /**
+     * Configure les options du formulaire (classe d'entité liée).
+     * @param OptionsResolver $resolver
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

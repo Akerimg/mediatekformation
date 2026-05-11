@@ -10,8 +10,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * Formulaire d'ajout et de modification d'une playlist.
+ * Permet la saisie du nom (obligatoire) et de la description (optionnelle).
+ */
 class PlaylistType extends AbstractType
 {
+    /**
+     * Construit le formulaire avec les champs name et description.
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -27,6 +37,11 @@ class PlaylistType extends AbstractType
         ;
     }
 
+    /**
+     * Configure le formulaire pour qu'il soit lié à l'entité Playlist.
+     * @param OptionsResolver $resolver
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

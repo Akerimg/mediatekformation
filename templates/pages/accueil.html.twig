@@ -23,6 +23,7 @@
                                 {% if formation.picture %}
                                     <a href="{{ path('formations.showone', {id:formation.id}) }}">
                                     <img src="{{ formation.picture }}" 
+                                         alt=''{{ formation.picture }}''
                                          class="card-img-top" style="width:100%;height:auto;">
                                     </a>    
                                 {% endif %}

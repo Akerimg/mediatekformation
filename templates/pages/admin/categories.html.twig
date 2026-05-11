@@ -1,0 +1,46 @@
+{% extends "basefront.html.twig" %}
+{% block body %}
+    <div class="container mt-3">
+        <h4 class="text-info">Gestion des catégories</h4>
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        <form method="POST" action="{{ path('admin.categories.ajouter') }}" class="row g-2 mb-4">
+            <div class="col-auto">
+                <input type="text" name="name" class="form-control" placeholder="Nom de la catégorie" required>
+            </div>
+            <div class="col-auto">
+                <input type="hidden" name="_token" value="{{ csrf_token('ajouter_categorie') }}">
+                <button type="submit" class="btn btn-success">Ajouter</button>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <caption>Liste des catégories</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col" class="text-center">Nb formations</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categorie in categories %}
+                    <tr class="align-middle">
+                        <td>{{ categorie.name }}</td>
+                        <td class="text-center">{{ categorie.formations|length }}</td>
+                        <td class="text-center">
+                            <form method="POST" action="{{ path('admin.categories.supprimer', {id:categorie.id}) }}" style="display:inline"
+                                  onsubmit="return confirm('Confirmer la suppression de cette catégorie ?')">
+                                <input type="hidden" name="_token" value="{{ csrf_token('supprimer' ~ categorie.id) }}">
+                                <button type="submit" class="btn btn-danger btn-sm" {% if categorie.formations|length > 0 %}disabled title="Impossible : la catégorie est rattachée à des formations"{% endif %}>Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

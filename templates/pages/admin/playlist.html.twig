@@ -1,0 +1,41 @@
+{% extends "basefront.html.twig" %}
+{% block body %}
+    <div class="container mt-3">
+        <h4 class="text-info">
+            {% if playlist.id %}
+                Modifier la playlist
+            {% else %}
+                Ajouter une playlist
+            {% endif %}
+        </h4>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(formplaylist) }}
+                    <div class="mb-3">
+                        {{ form_label(formplaylist.name, 'Nom') }}
+                        {{ form_widget(formplaylist.name, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(formplaylist.name) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(formplaylist.description, 'Description') }}
+                        {{ form_widget(formplaylist.description, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                        {{ form_errors(formplaylist.description) }}
+                    </div>
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                    <a href="{{ path('admin.playlists') }}" class="btn btn-secondary">Annuler</a>
+                {{ form_end(formplaylist) }}
+            </div>
+            {% if playlist.id and playlistformations|length > 0 %}
+                <div class="col-md-6">
+                    <h5>Formations rattachées</h5>
+                    <ul class="list-group">
+                        {% for formation in playlistformations %}
+                            <li class="list-group-item">{{ formation.title }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="text-muted mt-2"><small>Pour ajouter ou supprimer une formation, modifiez-la depuis la page de gestion des formations.</small></p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

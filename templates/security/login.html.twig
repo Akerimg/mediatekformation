@@ -1,0 +1,21 @@
+{% extends "basefront.html.twig" %}
+{% block body %}
+    <div class="container mt-3">
+        <h4 class="text-info">Connexion administrateur</h4>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form method="POST" action="{{ path('login') }}" class="col-md-4">
+            <div class="mb-3">
+                <label for="username" class="form-label">Identifiant</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required autofocus>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" id="password" name="_password" class="form-control" required>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button type="submit" class="btn btn-success">Se connecter</button>
+        </form>
+    </div>
+{% endblock %}

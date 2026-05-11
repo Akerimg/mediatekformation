@@ -1,6 +1,7 @@
 {% extends "basefront.html.twig" %}
 {% block body %}
     <table class="table table-striped">
+        <caption>Description du tableau</caption>
         <thead>
             <tr>
                 <th class="text-left align-top" scope="col">
@@ -32,9 +33,14 @@
                         </select>                    
                     </form>            
                 </th>
-                <th class="text-center align-top" scope="col">
-                    &nbsp;
-                </th>				
+<th class="text-center align-top" scope="col">
+    nb formations<br />
+    <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+    <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+</th>
+<th class="text-center align-top" scope="col">
+    &nbsp;
+</th>				
             </tr>
         </thead>
         <tbody>
@@ -54,7 +60,10 @@
                                     &nbsp;{{ categories[c] }}                                  
                                 {% endfor %}
                             {% endif %}
-                        </td>            					
+                        </td>    
+<td class="text-center">
+    {{ playlists[k].formations|length }}
+</td>                        
                         <td class="text-center">
                             <a href="{{ path('playlists.showone', {id:playlists[k].id}) }}" class="btn btn-secondary">Voir détail</a>
                         </td> 					

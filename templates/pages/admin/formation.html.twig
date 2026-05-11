@@ -1,0 +1,46 @@
+{% extends "basefront.html.twig" %}
+{% block body %}
+    <div class="container mt-3">
+        <h4 class="text-info">
+            {% if formation.id %}
+                Modifier la formation
+            {% else %}
+                Ajouter une formation
+            {% endif %}
+        </h4>
+        {{ form_start(formformation) }}
+            <div class="mb-3">
+                {{ form_label(formformation.title, 'Titre') }}
+                {{ form_widget(formformation.title, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(formformation.title) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(formformation.description, 'Description') }}
+                {{ form_widget(formformation.description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(formformation.description) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(formformation.videoId, 'Identifiant vidéo') }}
+                {{ form_widget(formformation.videoId, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(formformation.videoId) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(formformation.publishedAt, 'Date de publication') }}
+                {{ form_widget(formformation.publishedAt, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(formformation.publishedAt) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(formformation.playlist, 'Playlist') }}
+                {{ form_widget(formformation.playlist, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(formformation.playlist) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(formformation.categories, 'Catégories') }}
+                {{ form_widget(formformation.categories, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(formformation.categories) }}
+            </div>
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <a href="{{ path('admin.formations') }}" class="btn btn-secondary">Annuler</a>
+        {{ form_end(formformation) }}
+    </div>
+{% endblock %}
